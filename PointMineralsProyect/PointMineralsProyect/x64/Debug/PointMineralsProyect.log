@@ -1,2 +1,32 @@
 ﻿  main.cpp
-  PointMineralsProyect.vcxproj -> D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\x64\Debug\PointMineralsProyect.exe
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(39,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(40,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(41,49): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(41,37): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(62,85): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(62,73): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  PointMineralsProyect.vcxproj -> C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\x64\Debug\PointMineralsProyect.exe
