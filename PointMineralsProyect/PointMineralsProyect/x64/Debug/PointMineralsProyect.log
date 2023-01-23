@@ -1,17 +1,29 @@
 ﻿  main.cpp
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(39,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(40,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(41,49): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(18,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(19,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(20,55): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(41,37): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(20,43): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
           with
           [
               T=int
           ]
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(62,85): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(99,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(100,22): warning C4244: 'inicializando': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(101,49): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(101,37): warning C4244: 'argumento': conversión de 'float' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(122,89): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
           with
           [
               T=int
@@ -20,7 +32,7 @@ C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\Point
           [
               T=float
           ]
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(62,73): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(122,77): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
           with
           [
               T=int
