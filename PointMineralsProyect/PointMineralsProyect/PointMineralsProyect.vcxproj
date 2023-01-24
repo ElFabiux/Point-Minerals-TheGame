@@ -140,9 +140,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MethodBaraja.cpp" />
+    <ClCompile Include="MethodCarta.cpp" />
+    <ClCompile Include="MethodGame.cpp" />
+    <ClCompile Include="MethodMarket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Baraja.h" />
+    <ClInclude Include="Carta.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Market.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
