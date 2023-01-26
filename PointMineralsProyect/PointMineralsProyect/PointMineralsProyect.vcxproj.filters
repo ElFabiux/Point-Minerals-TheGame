@@ -18,16 +18,25 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MethodCarta.cpp">
+    <ClCompile Include="Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MethodBaraja.cpp">
+    <ClCompile Include="Baraja.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MethodMarket.cpp">
+    <ClCompile Include="Market.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MethodGame.cpp">
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rules.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mineral.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,7 +46,7 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Carta.h">
+    <ClInclude Include="Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Baraja.h">
@@ -47,6 +56,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Market.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rules.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mineral.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

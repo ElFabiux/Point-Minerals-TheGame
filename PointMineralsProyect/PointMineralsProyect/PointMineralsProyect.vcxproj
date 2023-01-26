@@ -140,19 +140,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MethodBaraja.cpp" />
-    <ClCompile Include="MethodCarta.cpp" />
-    <ClCompile Include="MethodGame.cpp" />
-    <ClCompile Include="MethodMarket.cpp" />
+    <ClCompile Include="Baraja.cpp" />
+    <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Market.cpp" />
+    <ClCompile Include="Mineral.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rules.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Baraja.h" />
-    <ClInclude Include="Carta.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Market.h" />
+    <ClInclude Include="Mineral.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Rules.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

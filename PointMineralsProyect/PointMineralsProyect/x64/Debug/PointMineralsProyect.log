@@ -1,2 +1,56 @@
-﻿  MethodBaraja.cpp
-  PointMineralsProyect.vcxproj -> C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\x64\Debug\PointMineralsProyect.exe
+﻿  main.cpp
+  Baraja.cpp
+  Card.cpp
+  Game.cpp
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Game.cpp(65,89): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Game.cpp(65,77): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Game.cpp(70,94): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Game.cpp(70,82): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  Market.cpp
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Market.cpp(30,22): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Market.cpp(31,22): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Market.cpp(32,49): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\Market.cpp(32,37): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  Player.cpp
+  Generating Code...
+  PointMineralsProyect.vcxproj -> D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\x64\Debug\PointMineralsProyect.exe

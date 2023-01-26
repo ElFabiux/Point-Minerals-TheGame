@@ -1,9 +1,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+using namespace std;
 #include "Game.h"
 #include "Market.h"
-#include "Carta.h"
+#include "Card.h"
 #include "Baraja.h"
 
 /*class Carta {

@@ -1,14 +1,15 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+using namespace std;
 #include "Baraja.h"
 
 class Market {
 private:
-    sf::RenderWindow m_window;
-    sf::Sprite m_background;
-    sf::Texture m_backgroundTexture;
-    Baraja m_baraja;
+    sf::RenderWindow window;
+    sf::Sprite background;
+    sf::Texture backgroundTexture;
+    Baraja baraja;
 
 public:
     Market();
@@ -16,3 +17,4 @@ public:
 private:
     void centerWindow();
 };
+
