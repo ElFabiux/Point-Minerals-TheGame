@@ -4,7 +4,7 @@ using namespace std;
 #include "Game.h"
 #include "Market.h"
 #include "Card.h"
-#include "Baraja.h"
+#include "Deck.h"
 
 /*class Carta {
 private:
@@ -204,6 +204,5 @@ private:
 
 int main() {
     Game game;
-    game.run();
     return 0;
 }

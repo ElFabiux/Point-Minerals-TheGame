@@ -2,14 +2,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 using namespace std;
-#include "Baraja.h"
+#include "Deck.h"
 
 class Market {
 private:
     sf::RenderWindow window;
     sf::Sprite background;
     sf::Texture backgroundTexture;
-    Baraja baraja;
+    Deck deck;
 
 public:
     Market();

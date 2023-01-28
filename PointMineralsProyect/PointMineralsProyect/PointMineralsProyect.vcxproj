@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Baraja.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Market.cpp" />
     <ClCompile Include="Mineral.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rules.cpp" />
   </ItemGroup>
@@ -152,11 +154,13 @@
     <Font Include="arial.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Baraja.h" />
+    <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Market.h" />
     <ClInclude Include="Mineral.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rules.h" />
   </ItemGroup>

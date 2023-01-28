@@ -1,6 +1,6 @@
 #include "Market.h"
 
-Market::Market() : window(sf::VideoMode::getDesktopMode(), "Market"), baraja() {
+Market::Market() : window(sf::VideoMode::getDesktopMode(), "Market"), deck() {
     if (!backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg")) {
         std::cout << "Error loading image file" << std::endl;
     }
@@ -18,8 +18,8 @@ void Market::run() {
 
         window.draw(background);
 
-        for (int i = 0; i < baraja.getNumCartas(); i++) {
-            window.draw(baraja.getCartas()[i].getSprite());
+        for (int index = 0; index < deck.getNumCards(); index++) {
+            window.draw(deck.getCards()[index].getSprite());
         }
 
         window.display();

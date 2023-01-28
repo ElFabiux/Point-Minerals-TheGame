@@ -19,5 +19,5 @@ public:
     void loadTexture(const std::string& rutaTextura);
 
     // Método para obtener el sprite de la carta
-    sf::Sprite& getSprite() { return sprite; }
+    sf::Sprite& getSprite();
 };

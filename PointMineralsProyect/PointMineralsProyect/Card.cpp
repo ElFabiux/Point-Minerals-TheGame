@@ -17,3 +17,7 @@ void Card::loadTexture(const std::string& rutaTextura) {
     texture.setRepeated(false);
     sprite.setTexture(texture);
 }
+
+sf::Sprite& Card::getSprite() {
+    return sprite;
+}
