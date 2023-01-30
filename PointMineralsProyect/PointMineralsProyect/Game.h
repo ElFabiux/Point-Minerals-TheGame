@@ -2,17 +2,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 using namespace std;
-#include "Market.h"
 
 class Game {
 private:
-    Market market;
-
-    bool loadButton(const std::string&, sf::Texture&);
+    bool loadButtons(const std::string&, sf::Texture&);
     void centerButton(sf::Sprite&, sf::RenderWindow&);
     void createLobby();
-    void runWindow(sf::RenderWindow&, sf::Sprite&, sf::Sprite&,
-                   sf::Sprite&);
+    void createMarket();
+    void runLobbyWindow(sf::RenderWindow&, sf::Sprite&, sf::Sprite&, sf::Sprite&);
+    void runMarketWindow(sf::RenderWindow&, sf::Sprite&);
 public:
     Game();
 };

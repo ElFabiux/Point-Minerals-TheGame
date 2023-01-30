@@ -1,6 +1,7 @@
 #include "Game.h"
 
-bool Game::loadButton(const std::string& filepath, sf::Texture& texture) {
+//Cargar los botones
+bool Game::loadButtons(const std::string& filepath, sf::Texture& texture) {
     if (!texture.loadFromFile(filepath)) {
         return false;
     }
@@ -9,7 +10,7 @@ bool Game::loadButton(const std::string& filepath, sf::Texture& texture) {
     return true;
 }
 
-
+//Centrar los botones
 void Game::centerButton(sf::Sprite& button, sf::RenderWindow& window) {
     button.setScale(sf::Vector2f(200.f / button.getLocalBounds().width, 120.f / button.getLocalBounds().height));
     float posX = (window.getSize().x - button.getLocalBounds().width * button.getScale().x) / 2;
@@ -17,8 +18,9 @@ void Game::centerButton(sf::Sprite& button, sf::RenderWindow& window) {
     button.setPosition(posX, posY);
 }
 
-void Game::runWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite, sf::Sprite& loadButtonSprite, 
-                        sf::Sprite& backgroundSprite)
+//Cargar la ventana 
+void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite, sf::Sprite& loadButtonSprite,
+    sf::Sprite& backgroundSprite)
 {
     window.setFramerateLimit(60);
     while (window.isOpen()) {
@@ -39,7 +41,7 @@ void Game::runWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite, sf:
                     if (playButtonSprite.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                         std::cout << "Play button clicked!" << std::endl;
                         window.close();
-                        market.run();
+                        createMarket();
                     }
                     else if (loadButtonSprite.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                         std::cout << "Load button clicked!" << std::endl;
@@ -57,6 +59,22 @@ void Game::runWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite, sf:
         window.draw(loadButtonSprite);
 
         // Display the window
+        window.display();
+    }
+}
+
+void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite) {
+    window.setFramerateLimit(60);
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear();
+
+        window.draw(backgroundSprite);
+
         window.display();
     }
 }
@@ -81,8 +99,8 @@ void Game::createLobby() {
     sf::Sprite loadButtonSprite;
 
     // Load the button images
-    loadButton("ResourseFiles/Buttons/Play.png", playButtonTexture);
-    loadButton("ResourseFiles/Buttons/Load.png", loadButtonTexture);
+    loadButtons("ResourseFiles/Buttons/Play.png", playButtonTexture);
+    loadButtons("ResourseFiles/Buttons/Load.png", loadButtonTexture);
 
     // Create the button sprites
     playButtonSprite.setTexture(playButtonTexture);
@@ -93,11 +111,26 @@ void Game::createLobby() {
     centerButton(loadButtonSprite, window);
     loadButtonSprite.move(425, 180);
 
-    runWindow(window, playButtonSprite, loadButtonSprite, backgroundSprite);
+    runLobbyWindow(window, playButtonSprite, loadButtonSprite, backgroundSprite);
 }
 
+void Game::createMarket() {
+    sf::RenderWindow window;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
+
+    // Create the main window
+    window.create(sf::VideoMode::getDesktopMode(), "Welcome to Point Mineral");
+
+    // Load the background image
+    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg");
+
+    // Create the background sprite
+    backgroundSprite.setTexture(backgroundTexture);
+
+    runMarketWindow(window, backgroundSprite);
+}
 
 Game::Game() {
     createLobby();
 }
-

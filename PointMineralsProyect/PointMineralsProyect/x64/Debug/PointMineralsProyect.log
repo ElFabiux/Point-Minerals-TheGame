@@ -1,7 +1,4 @@
 ﻿  main.cpp
-C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\PointMineralsProyect\main.cpp(132,62): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-          with
-          [
-              T=unsigned int
-          ]
-  PointMineralsProyect.vcxproj -> C:\Users\kenne\OneDrive\Escritorio\PointMineralGame\Point-Minerals-TheGame\PointMineralsProyect\x64\Debug\PointMineralsProyect.exe
+  ListCard.cpp
+  Generating Code...
+  PointMineralsProyect.vcxproj -> D:\User\Desktop\Progra Verano\Proyectos\Proyecto Minerales\Point-Minerals-TheGame\PointMineralsProyect\x64\Debug\PointMineralsProyect.exe

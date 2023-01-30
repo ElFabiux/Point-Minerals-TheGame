@@ -1,7 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "Market.h"
 #include "ListCard.h"
 
 /*class Node
@@ -81,6 +80,7 @@ public:
 
 int main()
 {
+    /*
     // Crear una ventana SFML
     sf::RenderWindow window(sf::VideoMode(800, 600), "Cartas");
 
@@ -142,6 +142,8 @@ int main()
         // Mostrar la ventana
         window.display();
     }
+    */
+    Game game;
 
     return 0;
 }
