@@ -20,6 +20,7 @@ void Game::centerButton(sf::Sprite& button, sf::RenderWindow& window) {
 void Game::runWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite, sf::Sprite& loadButtonSprite, 
                         sf::Sprite& backgroundSprite)
 {
+    window.setFramerateLimit(60);
     while (window.isOpen()) {
         // Process events
         sf::Event event;

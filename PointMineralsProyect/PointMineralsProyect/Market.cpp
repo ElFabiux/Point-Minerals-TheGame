@@ -1,6 +1,6 @@
 #include "Market.h"
 
-Market::Market() : window(sf::VideoMode::getDesktopMode(), "Market"), deck() {
+Market::Market() : window(sf::VideoMode::getDesktopMode(), "Market"){
     if (!backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg")) {
         std::cout << "Error loading image file" << std::endl;
     }
@@ -9,6 +9,7 @@ Market::Market() : window(sf::VideoMode::getDesktopMode(), "Market"), deck() {
 }
 
 void Market::run() {
+    window.setFramerateLimit(60);
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -17,10 +18,6 @@ void Market::run() {
         }
 
         window.draw(background);
-
-        for (int index = 0; index < deck.getNumCards(); index++) {
-            window.draw(deck.getCards()[index].getSprite());
-        }
 
         window.display();
     }
