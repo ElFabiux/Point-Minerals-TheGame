@@ -1,5 +1,6 @@
 #include "Game.h"
 
+/*
 //Cargar los botones
 bool Game::loadButtons(const std::string& filepath, sf::Texture& texture) {
     if (!texture.loadFromFile(filepath)) {
@@ -17,11 +18,53 @@ void Game::centerButton(sf::Sprite& button, sf::RenderWindow& window) {
     float posY = (window.getSize().y - button.getLocalBounds().height * button.getScale().y) / 2;
     button.setPosition(posX, posY);
 }
+*/
+
+void Game::createLobby() {
+    sf::RenderWindow window;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
+
+    // Create the main window
+    window.create(sf::VideoMode::getDesktopMode(), "Welcome to Point Mineral");
+
+    // Load the background image
+    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Lobby.png");
+
+    // Create the background sprite
+    backgroundSprite.setTexture(backgroundTexture);
+
+    runLobbyWindow(window, backgroundSprite);
+}
+
+void Game::createMarket() {
+    sf::RenderWindow window;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
+
+    // Create the main window
+    window.create(sf::VideoMode::getDesktopMode(), "Welcome to Point Mineral");
+
+    // Load the background image
+    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg");
+
+    // Create the background sprite
+    backgroundSprite.setTexture(backgroundTexture);
+
+    runMarketWindow(window, backgroundSprite);
+}
 
 //Cargar la ventana 
-void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite, sf::Sprite& loadButtonSprite,
-    sf::Sprite& backgroundSprite)
+void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite)
 {
+    Button playB("ResourseFiles/Buttons/Play.png");
+    Button loadB("ResourseFiles/Buttons/Load.png");
+
+    playB.centerButton(window);
+    loadB.centerButton(window);
+    playB.moveButton(-425, 180);
+    loadB.moveButton(425, 180);
+
     window.setFramerateLimit(60);
     while (window.isOpen()) {
         // Process events
@@ -38,12 +81,12 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite
                     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 
                     // Check if the mouse is over the button
-                    if (playButtonSprite.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                    if (playB.mouseClick(window)) {
                         std::cout << "Play button clicked!" << std::endl;
                         window.close();
                         createMarket();
                     }
-                    else if (loadButtonSprite.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                    else if (loadB.mouseClick(window)) {
                         std::cout << "Load button clicked!" << std::endl;
                     }
                 }
@@ -55,8 +98,8 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& playButtonSprite
 
         // Draw the background and buttons
         window.draw(backgroundSprite);
-        window.draw(playButtonSprite);
-        window.draw(loadButtonSprite);
+        playB.showButton(window);
+        loadB.showButton(window);
 
         // Display the window
         window.display();
@@ -79,58 +122,8 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
     }
 }
 
-void Game::createLobby() {
-    sf::RenderWindow window;
-    sf::Texture backgroundTexture;
-    sf::Sprite backgroundSprite;
-
-    // Create the main window
-    window.create(sf::VideoMode::getDesktopMode(), "Welcome to Point Mineral");
-
-    // Load the background image
-    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Lobby.png");
-
-    // Create the background sprite
-    backgroundSprite.setTexture(backgroundTexture);
-
-    sf::Texture playButtonTexture;
-    sf::Sprite playButtonSprite;
-    sf::Texture loadButtonTexture;
-    sf::Sprite loadButtonSprite;
-
-    // Load the button images
-    loadButtons("ResourseFiles/Buttons/Play.png", playButtonTexture);
-    loadButtons("ResourseFiles/Buttons/Load.png", loadButtonTexture);
-
-    // Create the button sprites
-    playButtonSprite.setTexture(playButtonTexture);
-    centerButton(playButtonSprite, window);
-    playButtonSprite.move(-425, 180);
-
-    loadButtonSprite.setTexture(loadButtonTexture);
-    centerButton(loadButtonSprite, window);
-    loadButtonSprite.move(425, 180);
-
-    runLobbyWindow(window, playButtonSprite, loadButtonSprite, backgroundSprite);
-}
-
-void Game::createMarket() {
-    sf::RenderWindow window;
-    sf::Texture backgroundTexture;
-    sf::Sprite backgroundSprite;
-
-    // Create the main window
-    window.create(sf::VideoMode::getDesktopMode(), "Welcome to Point Mineral");
-
-    // Load the background image
-    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg");
-
-    // Create the background sprite
-    backgroundSprite.setTexture(backgroundTexture);
-
-    runMarketWindow(window, backgroundSprite);
-}
-
 Game::Game() {
     createLobby();
 }
+
+

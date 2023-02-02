@@ -1,7 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "ListCard.h"
+#include "LinkedList.h"
+#include "Card.h"
 
 /*class Node
 {
@@ -80,12 +81,13 @@ public:
 
 int main()
 {
+
     /*
     // Crear una ventana SFML
     sf::RenderWindow window(sf::VideoMode(800, 600), "Cartas");
 
     // Crear una lista doblemente enlazada de sprites
-    ListCarta cardList;
+    LinkedList cardList;
 
     // Cargar las imágenes de las cartas en texturas
     sf::Texture cardTexture1, cardTexture2, cardTexture3;
@@ -100,7 +102,11 @@ int main()
     cardList.push_front(&card1);
     cardList.push_front(&card2);
     cardList.push_front(&card3);
+    */
 
+    ////////////////////////////////
+
+    /*
     // Escalar los sprites a un tamaño más pequeño
     float scaleFactor = 0.5f;
     for (auto node = cardList.first; node != nullptr; node = node->next)
@@ -143,6 +149,7 @@ int main()
         window.display();
     }
     */
+    
     Game game;
 
     return 0;

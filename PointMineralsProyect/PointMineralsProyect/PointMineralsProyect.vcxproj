@@ -139,20 +139,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rules.cpp" />
-    <ClCompile Include="ListCard.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="ListCard.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Player.h" />
