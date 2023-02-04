@@ -360,7 +360,7 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
 
         //Prueba de nombre y puntos de la clase player
         Jugador jugador1("Jugador 1:", 10, 10);
-        Jugador jugador2("Jugador 2:", 270, 10);
+        Jugador jugador2("Jugador 2:", 410, 10);
         jugador1.Dibujar(window);
         jugador2.Dibujar(window);
         //
