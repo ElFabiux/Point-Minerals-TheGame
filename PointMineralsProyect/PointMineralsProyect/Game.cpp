@@ -3,6 +3,7 @@
 #include "game.h"
 #include "Card.h"
 #include "LinkedList.h"
+#include "Player.h"
 
 /*
 
@@ -60,7 +61,7 @@ void Game::createLobby() {
 
     // Load the background image 
 
-    backgroundTexture.loadFromFile("resourcesfiles/Lobby.png");
+    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Lobby.png");
 
 
 
@@ -94,7 +95,7 @@ void Game::createMarket() {
 
     // Load the background image 
 
-    backgroundTexture.loadFromFile("resourcesfiles/Table.jpg");
+    backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg");
 
 
 
@@ -120,11 +121,9 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
         windowSize.x / backgroundSprite.getLocalBounds().width,
         windowSize.y / backgroundSprite.getLocalBounds().height
     );
-    Button playB("resourcesfiles/Play.png");
+    Button playB("ResourseFiles/Buttons/Play.png");
 
-    Button loadB("resourcesfiles/Load.png");
-
-
+    Button loadB("ResourseFiles/Buttons/Load.png");
 
     playB.centerButton(window);
 
@@ -230,25 +229,22 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
 
     while (window.isOpen()) {
         sf::Event event;
-
-
         while (window.pollEvent(event)) {
-
-            if (event.type == sf::Event::Closed)
-
+            if (event.type == sf::Event::Closed) {
                 window.close();
+            }
         }
         sf::Color colorFondo(28, 211, 120);
         window.clear(colorFondo);
         window.draw(backgroundSprite);
         sf::Texture cardTexture1, cardTexture2, cardTexture3, cardTexture4, cardTexture5, cardTexture6;
-        cardTexture1.loadFromFile("resourcesfiles/LogoDiamond.jpg");
-        cardTexture2.loadFromFile("resourcesfiles/LogoEmerald.jpg");
-        cardTexture3.loadFromFile("resourcesfiles/LogoFluorite.jpg");
+        cardTexture1.loadFromFile("ResourseFiles/Diamond/LogoDiamond.jpg");
+        cardTexture2.loadFromFile("ResourseFiles/Emerald/LogoEmerald.jpg");
+        cardTexture3.loadFromFile("ResourseFiles/Fluorite/LogoFluorite.jpg");
 
-        cardTexture4.loadFromFile("resourcesfiles/LogoDiamond.jpg");
-        cardTexture5.loadFromFile("resourcesfiles/LogoEmerald.jpg");
-        cardTexture6.loadFromFile("resourcesfiles/LogoFluorite.jpg");
+        cardTexture4.loadFromFile("ResourseFiles/Diamond/LogoDiamond.jpg");
+        cardTexture5.loadFromFile("ResourseFiles/Emerald/LogoEmerald.jpg");
+        cardTexture6.loadFromFile("ResourseFiles/Fluorite/LogoFluorite.jpg");
 
 
 
@@ -362,14 +358,19 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
 
         }
 
+        //Prueba de nombre y puntos de la clase player
+        Jugador jugador1("Jugador 1:", 10, 10);
+        Jugador jugador2("Jugador 2:", 270, 10);
+        jugador1.Dibujar(window);
+        jugador2.Dibujar(window);
+        //
+
         window.display();
 
         sf::sleep(sf::seconds(200));
     }
 
 }
-
-
 
 Game::Game() {
 
