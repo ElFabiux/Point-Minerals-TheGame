@@ -5,20 +5,15 @@
 class Player {
 public:
     Player(int x, int y);
-    void Dibujar(sf::RenderWindow& ventana);
-    void AumentarPuntos(int puntos);
+    void drawPlayer(sf::RenderWindow&);
+    void increasePoints(int);
 
 private:
-    std::string PedirNombre() {
-        std::cout << "Ingrese el nombre del jugador: ";
-        std::string nombre;
-        std::cin >> nombre;
-        return nombre;
-    }
-    std::string nombre;
-    int puntos;
-    sf::Font fuente;
-    sf::RectangleShape cuadro;
-    sf::Text texto_nombre;
-    sf::Text texto_puntos;
+    std::string enterName();
+    std::string playerName;
+    int points;
+    sf::Font font;
+    sf::RectangleShape square;
+    sf::Text nameText;
+    sf::Text pointsText;
 };

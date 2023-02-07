@@ -161,8 +161,8 @@ void Game::updateGame(LinkedList cardlist, sf::RenderWindow& window) {
     sf::Color colorFondo(28, 211, 120);
     window.clear(colorFondo);
     window.draw(backgroundSprite);
-    player1.Dibujar(window);
-    player2.Dibujar(window);
+    player1.drawPlayer(window);
+    player2.drawPlayer(window);
     for (auto node = cardlist.first; node != nullptr; node = node->next)
     {
 
