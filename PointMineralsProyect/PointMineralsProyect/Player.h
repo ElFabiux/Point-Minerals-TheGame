@@ -2,9 +2,9 @@
 #include <string>
 #include <iostream>
 
-class Jugador {
+class Player {
 public:
-    Jugador(int x, int y);
+    Player(int x, int y);
     void Dibujar(sf::RenderWindow& ventana);
     void AumentarPuntos(int puntos);
 

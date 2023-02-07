@@ -1,6 +1,6 @@
 #include "LinkedList.h"
 
-void LinkedList::push_front(sf::Sprite* c)
+void LinkedList::pushFront(sf::Sprite* c)
 {
     Node* n = new Node(c);
     if (first == nullptr)
@@ -15,7 +15,7 @@ void LinkedList::push_front(sf::Sprite* c)
     }
 }
 
-void LinkedList::push_back(sf::Sprite* c)
+void LinkedList::pushBack(sf::Sprite* c)
 {
     Node* n = new Node(c);
     if (first == nullptr)
@@ -30,7 +30,7 @@ void LinkedList::push_back(sf::Sprite* c)
     }
 }
 
-void LinkedList::insert_after(Node* n, sf::Sprite* c)
+void LinkedList::insertAfter(Node* n, sf::Sprite* c)
 {
     Node* newNode = new Node(c);
     newNode->prev = n;

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Jugador::Jugador(int x, int y) {
+Player::Player(int x, int y) {
     this->nombre = PedirNombre();
     this->puntos = 0;
 
@@ -21,13 +21,13 @@ Jugador::Jugador(int x, int y) {
     this->cuadro.setFillColor(sf::Color::White);
 }
 
-void Jugador::Dibujar(sf::RenderWindow& ventana) {
+void Player::Dibujar(sf::RenderWindow& ventana) {
     //ventana.draw(cuadro);
     ventana.draw(texto_nombre);
     ventana.draw(texto_puntos);
 }
 
-void Jugador::AumentarPuntos(int puntos) {
+void Player::AumentarPuntos(int puntos) {
     this->puntos += puntos;
     this->texto_puntos.setString(std::to_string(this->puntos));
 }

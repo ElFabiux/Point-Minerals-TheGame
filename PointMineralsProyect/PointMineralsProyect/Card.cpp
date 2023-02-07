@@ -20,9 +20,9 @@ void Card::fillMineralCards() {
     sf::Sprite card1(cardTexture1), card2(cardTexture2), card3(cardTexture3);
 
     // Agregar los sprites a la lista
-    mineralCards.push_front(&card1);
-    mineralCards.push_front(&card2);
-    mineralCards.push_front(&card3);
+    mineralCards.pushFront(&card1);
+    mineralCards.pushFront(&card2);
+    mineralCards.pushFront(&card3);
 }
 
 void Card::showMineralList(sf::RenderWindow& window) {

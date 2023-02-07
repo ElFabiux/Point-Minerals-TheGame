@@ -7,19 +7,16 @@
 #include <random>
 #include "Player.h"
 
-Jugador jugador1(10, 10);
-Jugador jugador2(410, 10);
+Player player1(10, 10);
+Player player2(410, 10);
 
 string group1[12];
-
 string group2[12];
-
 string group3[12];
 
 int g1 = 0;
 int g2 = 0;
 int g3 = 0;
-
 
 int monton1 = 11;
 int monton2 = 11;
@@ -29,7 +26,7 @@ int x[36];
 int y[36];
 int i = 0;
 
-int jugadorActual = 1;
+int currentPlayer = 1;
 int J1x = 7;
 int J1y = 165;
 
@@ -37,27 +34,27 @@ int J2x = 517;
 int J2y = 165;
 
 bool game = true;
-int jugadas = 0;
+int playerPlays = 0;
 
 int cartasUsadas1 = 0;
 int cartasUsadas2 = 0;
 
 LinkedList cardList;
-LinkedList condicionesList;
+LinkedList conditionList;
 
-int cartaMovidas[4];
-string cartasJ1[17];
-string cartasJ2[17];
-int jugado1 = 0;
-int jugado2 = 0;
+int movedCards[4];
+string cardsJ1[17];
+string cardsJ2[17];
+int playerCounter1 = 0;
+int playerCounter2 = 0;
 
 int M = 0;
 
-sf::Sprite cartas[35];
+sf::Sprite cardsSprites[35];
 
 vector<string> cardVector;
 
-void Game::crearGrupos(LinkedList cardList) {
+void Game::createGroups(LinkedList cardList) {
 
     for (auto node = cardList.first; node != nullptr; node = node->next)
     {
@@ -65,8 +62,7 @@ void Game::crearGrupos(LinkedList cardList) {
         oss << node;
         string cardNode = oss.str();
         sf::Vector2f pos = (*node->card).getPosition();
-        //std::cout << "posicion en la lista x:" << pos.x << " y:" << pos.y << cardNode << std::endl;
-        //std::cout << "posicion guardada x:" << x[c] <<" y:" << y[c] << std::endl;
+
         if (pos.x == x[0])
         {
             std::cout << "posicion de grupo1 " << pos.x << " " << x[0] << " " << cardNode << std::endl;
@@ -88,15 +84,12 @@ void Game::crearGrupos(LinkedList cardList) {
             group3[g3] = cardNode;
             g3++;
         }
-
-
-
     }
 }
 
-void Game::CalcularPosiciones(LinkedList CardList) {
+void Game::calculatePositions(LinkedList cardList) {
 
-    for (auto node = CardList.first; node != nullptr; node = node->next)
+    for (auto node = cardList.first; node != nullptr; node = node->next)
     {
         sf::Vector2f pos = (*node->card).getPosition();
         x[i] = pos.x;
@@ -105,7 +98,7 @@ void Game::CalcularPosiciones(LinkedList CardList) {
     }
 }
 
-void Game::CambiarPosiciones(LinkedList cardList) {
+void Game::changePositions(LinkedList cardList) {
     for (int i = 0; i < 36; i++)
     {
         for (auto node = cardList.first; node != nullptr; node = node->next)
@@ -116,24 +109,17 @@ void Game::CambiarPosiciones(LinkedList cardList) {
             if (cardVector[i] == cardString) {
 
                 node->card->setPosition(x[i], y[i]);
-
-
             }
-            //std::cout << "posicion: " << x[i] << "," << y[i] << std::endl;
         }
-        //std::cout << "nodo: " << cardVector[i] << std::endl;
-
     }
-
-
 }
 
-LinkedList Game::Posiciones(sf::RenderWindow& window, LinkedList Cardlist, float cardWidth) {
+LinkedList Game::positions(sf::RenderWindow& window, LinkedList cardlist, float cardWidth) {
     float xPos = (window.getSize().x) / 2.446;
     float yPos = (window.getSize().y) / 2.30;
     int a = 0;
 
-    for (auto node = Cardlist.first; node != nullptr; node = node->next)
+    for (auto node = cardlist.first; node != nullptr; node = node->next)
     {
         node->card->setPosition(xPos, yPos);
         xPos += cardWidth * 2.1;
@@ -145,10 +131,10 @@ LinkedList Game::Posiciones(sf::RenderWindow& window, LinkedList Cardlist, float
         a++;
     }
 
-    return Cardlist;
+    return cardlist;
 }
 
-LinkedList Game::reescalar(LinkedList cardList) {
+LinkedList Game::rescale(LinkedList cardList) {
 
     float scaleFactor = 0.5f;
 
@@ -161,7 +147,7 @@ LinkedList Game::reescalar(LinkedList cardList) {
     return cardList;
 }
 
-void Game::actualizarJuego(LinkedList Cardlist, sf::RenderWindow& window) {
+void Game::updateGame(LinkedList cardlist, sf::RenderWindow& window) {
     sf::Texture backgroundTexture;
 
     sf::Sprite backgroundSprite;
@@ -175,9 +161,9 @@ void Game::actualizarJuego(LinkedList Cardlist, sf::RenderWindow& window) {
     sf::Color colorFondo(28, 211, 120);
     window.clear(colorFondo);
     window.draw(backgroundSprite);
-    jugador1.Dibujar(window);
-    jugador2.Dibujar(window);
-    for (auto node = Cardlist.first; node != nullptr; node = node->next)
+    player1.Dibujar(window);
+    player2.Dibujar(window);
+    for (auto node = cardlist.first; node != nullptr; node = node->next)
     {
 
         window.draw(*node->card);
@@ -186,7 +172,7 @@ void Game::actualizarJuego(LinkedList Cardlist, sf::RenderWindow& window) {
 
 }
 
-void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int JugadorActual, sf::RenderWindow& window, int jx, int jy) {
+void Game::play(LinkedList cardList, sf::Vector2i mousePos, int cardU, int currentPlayer, sf::RenderWindow& window, int jx, int jy) {
 
     int x = 2;
     int y = 1;
@@ -198,8 +184,8 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
             oss << node;
             string cardNode = oss.str();
             sf::Vector2f pos = (*node->card).getPosition();
-            cartaMovidas[M + 1] = pos.x;
-            cartaMovidas[M + 1] = pos.y;
+            movedCards[M + 1] = pos.x;
+            movedCards[M + 1] = pos.y;
             M = M + 2;
             int posicion1 = pos.x;
             int posicion2 = pos.y;
@@ -207,12 +193,11 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
             if (pos.y > 400)
             {
 
-
                 //JUGADOR 1: 
-                if (JugadorActual == 1)
+                if (currentPlayer == 1)
                 {
-                    cartasJ1[jugado1] = cardNode;
-                    jugado1++;
+                    cardsJ1[playerCounter1] = cardNode;
+                    playerCounter1++;
                     std::cout << "coordenadas 1  " << jx << " " << jy << std::endl;
                     while ((posicion1 > jx) && (posicion2 > jy))
                     {
@@ -231,16 +216,13 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
                             //     std::cout << "Moviendo...  y  "<< posicion2 << std::endl;
                         }
 
-                        actualizarJuego(cardList, window);
-
-
+                        updateGame(cardList, window);
                     }
 
                     std::cout << "coordenadas nuevas 1  " << posicion1 << " " << posicion2 << std::endl;
 
                     if (posicion1 <= jx)
                     {
-
                         while (posicion2 > jy)
                         {
                             //       std::cout << "Falto y  "<< std::endl;
@@ -250,7 +232,7 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
 
                                 posicion2 = posicion2 - 1;
                                 //          std::cout << "Moviendo...  y  " << posicion2 << std::endl;
-                                actualizarJuego(cardList, window);
+                                updateGame(cardList, window);
                             }
                         }
                     }
@@ -266,7 +248,7 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
 
                                 posicion1 = posicion1 - 2;
                                 //       std::cout << "Moviendo...  x  " << posicion1 << std::endl;
-                                actualizarJuego(cardList, window);
+                                updateGame(cardList, window);
                             }
                         }
                     }
@@ -274,15 +256,15 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
 
                     if (M == 4)
                     {
-                        LlenarMercado(window);
+                        fillMarket(window);
                     }
                 }
 
                 //JUGADOR 2:
-                if (JugadorActual == 2)
+                if (currentPlayer == 2)
                 {
-                    cartasJ2[jugado2] = cardNode;
-                    jugado2++;
+                    cardsJ2[playerCounter2] = cardNode;
+                    playerCounter2++;
                     std::cout << "coordenadas 2  " << jx << " " << jy << std::endl;
                     while ((posicion1 < jx) && (posicion2 > jy))
                     {
@@ -301,7 +283,7 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
                             //      std::cout << "Moviendo...  y  " << posicion2 << std::endl;
                         }
 
-                        actualizarJuego(cardList, window);
+                        updateGame(cardList, window);
 
 
                     }
@@ -318,7 +300,7 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
 
                                 posicion2 = posicion2 - 1;
                                 //           std::cout << "Moviendo...  y  " << posicion2 << std::endl;
-                                actualizarJuego(cardList, window);
+                                updateGame(cardList, window);
                             }
                         }
                     }
@@ -334,37 +316,24 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
 
                                 posicion1 = posicion1 + 2;
                                 //         std::cout << "Moviendo...  x  " << posicion1 << std::endl;
-                                actualizarJuego(cardList, window);
+                                updateGame(cardList, window);
                             }
                         }
                     }
                     std::cout << "coordenadas nuevas 2  " << posicion1 << " " << posicion2 << std::endl;
                     if (M == 4)
                     {
-                        LlenarMercado(window);
+                        fillMarket(window);
                     }
-
                 }
-
-
             }
-
-
         }
-
-
     }
-
-
-
 }
 
-void Game::LlenarMercado(sf::RenderWindow& window) {
-    //327 g1
-    //382 g2
-    //438 g3
+void Game::fillMarket(sf::RenderWindow& window) {
 
-    int mitad = 0;
+    int half = 0;
     for (auto node = cardList.first; node != nullptr; node = node->next)
     {
         sf::Vector2f pos = (*node->card).getPosition();
@@ -375,41 +344,32 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
             oss << node;
             string cardNode = oss.str();
 
-            if (cartaMovidas[0] == 327)
+            if (movedCards[0] == 327)
             {
-
-
                 if (cardNode == group1[monton1]) {
-                    node->card->setPosition(cartaMovidas[0], cartaMovidas[1]);
+                    node->card->setPosition(movedCards[0], movedCards[1]);
 
                     monton1--;
                     M = 0;
                 }
-
-
-
             }
-            if (cartaMovidas[0] == 382)
+            if (movedCards[0] == 382)
             {
 
                 if (cardNode == group2[monton2]) {
-                    node->card->setPosition(cartaMovidas[0], cartaMovidas[1]);
+                    node->card->setPosition(movedCards[0], movedCards[1]);
                     monton2--;
                     M = 0;
                 }
-
-
             }
-            if (cartaMovidas[0] == 438)
+            if (movedCards[0] == 438)
             {
 
                 if (cardNode == group3[monton3]) {
-                    node->card->setPosition(cartaMovidas[0], cartaMovidas[1]);
+                    node->card->setPosition(movedCards[0], movedCards[1]);
                     monton3--;
                     M = 0;
                 }
-
-
             }
 
         }
@@ -426,42 +386,33 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
             string cardNode = oss.str();
 
             //CARTA 2
-
-
-            if (cartaMovidas[2] == 327)
+            if (movedCards[2] == 327)
             {
 
                 if (cardNode == group1[monton1]) {
-                    node->card->setPosition(cartaMovidas[2], cartaMovidas[3]);
+                    node->card->setPosition(movedCards[2], movedCards[3]);
                     monton1--;
 
                     M = 0;
                 }
-
-
-
             }
-            if (cartaMovidas[2] == 382)
+            if (movedCards[2] == 382)
             {
 
                 if (cardNode == group2[monton2]) {
-                    node->card->setPosition(cartaMovidas[2], cartaMovidas[3]);
+                    node->card->setPosition(movedCards[2], movedCards[3]);
                     monton2--;
                     M = 0;
                 }
-
-
             }
-            if (cartaMovidas[2] == 438)
+            if (movedCards[2] == 438)
             {
 
                 if (cardNode == group3[monton3]) {
-                    node->card->setPosition(cartaMovidas[2], cartaMovidas[3]);
+                    node->card->setPosition(movedCards[2], movedCards[3]);
                     monton3--;
                     M = 0;
                 }
-
-
             }
         }
     }
@@ -472,12 +423,12 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
     {
         if (monton2 >= monton3)
         {
-            mitad = (monton2 / 2);
-            monton2 = monton2 - mitad;
-            for (int i = 0; i < mitad; i++)
+            half = (monton2 / 2);
+            monton2 = monton2 - half;
+            for (int i = 0; i < half; i++)
             {
                 group1[i] = group2[i];
-                monton1 = monton1 + (mitad - 1);
+                monton1 = monton1 + (half - 1);
 
                 for (auto node = cardList.first; node != nullptr; node = node->next) {
                     ostringstream oss{};
@@ -498,16 +449,15 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                 }
 
             }
-
         }
         else
         {
-            mitad = (monton3 / 2);
-            monton3 = monton3 - mitad;
-            for (int i = 0; i < mitad; i++)
+            half = (monton3 / 2);
+            monton3 = monton3 - half;
+            for (int i = 0; i < half; i++)
             {
                 group1[i] = group3[i];
-                monton1 = monton1 + (mitad - 1);
+                monton1 = monton1 + (half - 1);
                 for (auto node = cardList.first; node != nullptr; node = node->next) {
                     ostringstream oss{};
                     oss << node;
@@ -535,12 +485,12 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
     {
         if (monton1 >= monton3)
         {
-            mitad = (monton1 / 2);
-            monton1 = monton1 - mitad;
-            for (int i = 0; i < mitad; i++)
+            half = (monton1 / 2);
+            monton1 = monton1 - half;
+            for (int i = 0; i < half; i++)
             {
                 group2[i] = group1[i];
-                monton2 = monton2 + (mitad - 1);
+                monton2 = monton2 + (half - 1);
 
                 for (auto node = cardList.first; node != nullptr; node = node->next) {
                     ostringstream oss{};
@@ -555,20 +505,18 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                             std::cout << "carta movida del grupo 1 monton 2: " << cardNode << node << std::endl;
                         }
                     }
-
                 }
 
             }
-
         }
         else
         {
-            mitad = (monton3 / 2);
-            monton3 = monton3 - mitad;
-            for (int i = 0; i < mitad; i++)
+            half = (monton3 / 2);
+            monton3 = monton3 - half;
+            for (int i = 0; i < half; i++)
             {
                 group2[i] = group3[i];
-                monton2 = monton2 + (mitad - 1);
+                monton2 = monton2 + (half - 1);
 
                 for (auto node = cardList.first; node != nullptr; node = node->next) {
                     ostringstream oss{};
@@ -596,12 +544,12 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
     {
         if (monton2 >= monton1)
         {
-            mitad = (monton2 / 2);
-            monton2 = monton2 - mitad;
-            for (int i = 0; i < mitad; i++)
+            half = (monton2 / 2);
+            monton2 = monton2 - half;
+            for (int i = 0; i < half; i++)
             {
                 group3[i] = group2[i];
-                monton3 = monton3 + mitad;
+                monton3 = monton3 + half;
 
                 for (auto node = cardList.first; node != nullptr; node = node->next) {
                     ostringstream oss{};
@@ -624,12 +572,12 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
         }
         else
         {
-            mitad = (monton1 / 2);
-            monton1 = monton1 - mitad;
-            for (int i = 0; i < mitad; i++)
+            half = (monton1 / 2);
+            monton1 = monton1 - half;
+            for (int i = 0; i < half; i++)
             {
                 group3[i] = group1[i];
-                monton3 = monton3 + mitad;
+                monton3 = monton3 + half;
 
                 for (auto node = cardList.first; node != nullptr; node = node->next) {
                     ostringstream oss{};
@@ -655,19 +603,14 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
 
     for (int i = 0; i < 17; i++)
     {
-        std::cout << "cartas de jugador 1: " << cartasJ1[i] << std::endl;
-        std::cout << "cartas de jugador 2: " << cartasJ2[i] << std::endl;
+        std::cout << "cartas de jugador 1: " << cardsJ1[i] << std::endl;
+        std::cout << "cartas de jugador 2: " << cardsJ2[i] << std::endl;
     }
 
-
-
-
-    actualizarJuego(cardList, window);
+    updateGame(cardList, window);
 }
 
-void Game::movimientosAuto(LinkedList cardList, string Grupo[], int monton) {
-    //jugador 1 x=7 y=165
-    //jugador 2 x=517 y=165
+void Game::autoMovement(LinkedList cardList, string group[], int monton) {
 
     int movimientos = 2;
     int cant = monton;
@@ -683,7 +626,7 @@ void Game::movimientosAuto(LinkedList cardList, string Grupo[], int monton) {
             sf::Vector2f pos = (*node->card).getPosition();
 
 
-            if (cardNode == Grupo[cant])
+            if (cardNode == group[cant])
             {
 
                 cant--;
@@ -695,13 +638,10 @@ void Game::movimientosAuto(LinkedList cardList, string Grupo[], int monton) {
             }
         }
     }
-
-
-
 }
 
 
-float Game::Height(sf::Sprite card) {
+float Game::height(sf::Sprite card) {
     float scaleFactor = 0.5f;
     float cardHeight = card.getGlobalBounds().height * scaleFactor;
 
@@ -709,7 +649,7 @@ float Game::Height(sf::Sprite card) {
 }
 
 
-float Game::Width(sf::Sprite card) {
+float Game::width(sf::Sprite card) {
     float scaleFactor = 0.5f;
     float cardWidth = card.getGlobalBounds().width * scaleFactor;
 
@@ -720,33 +660,18 @@ float Game::Width(sf::Sprite card) {
 void Game::createLobby() {
 
     sf::RenderWindow window;
-
     sf::Texture backgroundTexture;
-
     sf::Sprite backgroundSprite;
-
     std::ostringstream oss{};
 
-
-
     // Create the main window 
-
     window.create(sf::VideoMode::getDesktopMode(), "Welcome to Point Mineral");
 
-
-
     // Load the background image 
-
     backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Lobby.png");
 
-
-
     // Create the background sprite 
-
     backgroundSprite.setTexture(backgroundTexture);
-
-
-
     runLobbyWindow(window, backgroundSprite);
 
 }
@@ -755,38 +680,24 @@ void Game::createLobby() {
 void Game::createMarket() {
 
     sf::RenderWindow window;
-
     sf::Texture backgroundTexture;
-
     sf::Sprite backgroundSprite;
 
 
-
     // Create the main window 
-
     window.create(sf::VideoMode(800, 600), "welcome to Point Mineral");
 
-
-
     // Load the background image 
-
     backgroundTexture.loadFromFile("ResourseFiles/WallPapers/Table.jpg");
 
-
-
     // Create the background sprite 
-
     backgroundSprite.setTexture(backgroundTexture);
-
-
-
     runMarketWindow(window, backgroundSprite);
 
 }
 
 
 void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite)
-
 {
     sf::Vector2u windowSize = window.getSize();
     backgroundSprite.setScale(
@@ -794,18 +705,12 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
         windowSize.y / backgroundSprite.getLocalBounds().height
     );
     Button playB("ResourseFiles/Buttons/Play.png");
-
     Button loadB("ResourseFiles/Buttons/Load.png");
 
     playB.centerButton(window);
-
     loadB.centerButton(window);
-
     playB.moveButton(-425, 180);
-
     loadB.moveButton(425, 180);
-
-
 
     window.setFramerateLimit(60);
 
@@ -823,10 +728,7 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
 
                 window.close();
 
-
-
             // Handle mouse clicks 
-
             if (event.type == sf::Event::MouseButtonPressed) {
 
                 if (event.mouseButton.button == sf::Mouse::Left) {
@@ -834,8 +736,6 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
                     // Get the mouse position 
 
                     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-
-
 
                     // Check if the mouse is over the button 
 
@@ -848,7 +748,6 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
                         createMarket();
 
                     }
-
                     else if (loadB.mouseClick(window)) {
 
                         std::cout << "Load button clicked!" << std::endl;
@@ -861,23 +760,14 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
 
         }
 
-
-
         // Clear the window 
-
         window.clear();
 
-
-
         // Draw the background and buttons 
-
         window.draw(backgroundSprite);
 
         playB.showButton(window);
-
         loadB.showButton(window);
-
-
 
         // Display the window 
 
@@ -912,8 +802,6 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
         window.draw(backgroundSprite);
 
 
-
-
         sf::Texture cardTexture1, cardTexture2, cardTexture3, cardTexture4, cardTexture5, cardTexture6;
         cardTexture1.loadFromFile("ResourseFiles/Diamond/LogoDiamond.jpg");
         cardTexture2.loadFromFile("ResourseFiles/Emerald/LogoEmerald.jpg");
@@ -922,8 +810,6 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
         cardTexture4.loadFromFile("ResourseFiles/Gold/LogoGold.jpg");
         cardTexture5.loadFromFile("ResourseFiles/Iron/LogoIron.jpg");
         cardTexture6.loadFromFile("ResourseFiles/Ruby/LogoRuby.jpg");
-
-
 
         // Crear sprites a partir de las texturas
 
@@ -948,61 +834,54 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
         sf::Sprite card34(cardTexture4), card35(cardTexture5), card36(cardTexture6);
 
 
-        cardList.push_front(&card1);
-        cardList.push_front(&card2);
-        cardList.push_front(&card3);
-        cardList.push_front(&card4);
-        cardList.push_front(&card5);
-        cardList.push_front(&card6);
-        cardList.push_front(&card7);
-        cardList.push_front(&card8);
-        cardList.push_front(&card9);
-        cardList.push_front(&card10);
-        cardList.push_front(&card11);
-        cardList.push_front(&card12);
+        cardList.pushFront(&card1);
+        cardList.pushFront(&card2);
+        cardList.pushFront(&card3);
+        cardList.pushFront(&card4);
+        cardList.pushFront(&card5);
+        cardList.pushFront(&card6);
+        cardList.pushFront(&card7);
+        cardList.pushFront(&card8);
+        cardList.pushFront(&card9);
+        cardList.pushFront(&card10);
+        cardList.pushFront(&card11);
+        cardList.pushFront(&card12);
 
+        cardList.pushFront(&card13);
+        cardList.pushFront(&card14);
+        cardList.pushFront(&card15);
+        cardList.pushFront(&card16);
+        cardList.pushFront(&card17);
+        cardList.pushFront(&card18);
+        cardList.pushFront(&card19);
+        cardList.pushFront(&card20);
+        cardList.pushFront(&card21);
+        cardList.pushFront(&card22);
+        cardList.pushFront(&card23);
+        cardList.pushFront(&card24);
 
-        cardList.push_front(&card13);
-        cardList.push_front(&card14);
-        cardList.push_front(&card15);
-        cardList.push_front(&card16);
-        cardList.push_front(&card17);
-        cardList.push_front(&card18);
-        cardList.push_front(&card19);
-        cardList.push_front(&card20);
-        cardList.push_front(&card21);
-        cardList.push_front(&card22);
-        cardList.push_front(&card23);
-        cardList.push_front(&card24);
+        cardList.pushFront(&card25);
+        cardList.pushFront(&card26);
+        cardList.pushFront(&card27);
+        cardList.pushFront(&card28);
+        cardList.pushFront(&card29);
+        cardList.pushFront(&card30);
+        cardList.pushFront(&card31);
+        cardList.pushFront(&card32);
+        cardList.pushFront(&card33);
+        cardList.pushFront(&card34);
+        cardList.pushFront(&card35);
+        cardList.pushFront(&card36);
 
-
-        cardList.push_front(&card25);
-        cardList.push_front(&card26);
-        cardList.push_front(&card27);
-        cardList.push_front(&card28);
-        cardList.push_front(&card29);
-        cardList.push_front(&card30);
-        cardList.push_front(&card31);
-        cardList.push_front(&card32);
-        cardList.push_front(&card33);
-        cardList.push_front(&card34);
-        cardList.push_front(&card35);
-        cardList.push_front(&card36);
-
-
-
-        cardList = reescalar(cardList);
+        cardList = rescale(cardList);
         float scaleFactor = 0.5f;
 
         float cardWidth = card1.getGlobalBounds().width * scaleFactor;
         float cardHigh = card1.getGlobalBounds().height * scaleFactor;
 
-        cardList = Posiciones(window, cardList, cardWidth);
+        cardList = positions(window, cardList, cardWidth);
 
         //obtiene el nodo de cada carta y lo guarda en cardVector
-
-
-
 
         for (auto node = cardList.first; node != nullptr; node = node->next) {
             ostringstream oss{};
@@ -1019,20 +898,16 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
         //obtiene la posicion de cada carta
 
 
-        CalcularPosiciones(cardList);
+        calculatePositions(cardList);
+        changePositions(cardList);
+        createGroups(cardList);
 
 
-        CambiarPosiciones(cardList);
-
-
-        crearGrupos(cardList);
-
-
-        movimientosAuto(cardList, group1, monton1);
+        autoMovement(cardList, group1, monton1);
         monton1 = monton1 - 2;
-        movimientosAuto(cardList, group2, monton2);
+        autoMovement(cardList, group2, monton2);
         monton2 = monton2 - 2;
-        movimientosAuto(cardList, group3, monton3);
+        autoMovement(cardList, group3, monton3);
         monton3 = monton3 - 2;
 
         for (auto node = cardList.first; node != nullptr; node = node->next)
@@ -1043,8 +918,6 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
              // std::cout << "carta dibujada!"<< node << std::endl;
             window.draw(*node->card);
         }
-
-
 
         window.display();
 
@@ -1067,19 +940,16 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
                             sf::FloatRect spriteBounds = node->card->getGlobalBounds();
                             if (spriteBounds.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
 
-
-
-
-                                if (jugadas < 5)
+                                if (playerPlays < 5)
                                 {
 
-                                    jugadas++;
-                                    if (jugadorActual == 1)
+                                    playerPlays++;
+                                    if (currentPlayer == 1)
                                     {
                                         std::cout << "cartas jugadas 1: " << cartasUsadas1 << std::endl;
                                         std::cout << "movimiento j1 en x: " << J1x << std::endl;
 
-                                        Jugada(cardList, mousePos, cartasUsadas1, jugadorActual, window, J1x, J1y);
+                                        play(cardList, mousePos, cartasUsadas1, currentPlayer, window, J1x, J1y);
 
                                         J1x += cardWidth * 2.1;;
 
@@ -1095,27 +965,26 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
                                             cartasUsadas1++;
                                         }
 
-
-                                        std::cout << "jugada: " << jugadas << std::endl;
-                                        if (jugadas == 2)
+                                        std::cout << "jugada: " << playerPlays << std::endl;
+                                        if (playerPlays == 2)
                                         {
 
 
-                                            jugadorActual = 2;
+                                            currentPlayer = 2;
 
 
                                         }
 
                                     }
-                                    if (jugadas >= 3)
+                                    if (playerPlays >= 3)
                                     {
                                         std::cout << "cartas jugadas 2: " << cartasUsadas2 << std::endl;
-                                        if (jugadorActual == 2)
+                                        if (currentPlayer == 2)
                                         {
                                             std::cout << "movimiento j2 en x: " << J2x << std::endl;
 
 
-                                            Jugada(cardList, mousePos, cartasUsadas2, jugadorActual, window, J2x, J2y);
+                                            play(cardList, mousePos, cartasUsadas2, currentPlayer, window, J2x, J2y);
 
                                             J2x += cardWidth * 2.1;;
 
@@ -1129,41 +998,24 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
                                             {
                                                 cartasUsadas2++;
                                             }
-
-
-                                            std::cout << "jugada: " << jugadas << std::endl;
-                                            if (jugadas == 4)
+                                            std::cout << "jugada: " << playerPlays << std::endl;
+                                            if (playerPlays == 4)
                                             {
-
-                                                jugadorActual = 1;
-                                                jugadas = jugadas - 4;
-
+                                                currentPlayer = 1;
+                                                playerPlays = playerPlays - 4;
                                             }
-
                                         }
                                     }
-
                                 }
-
-
-
-
                             }
-
                         }
                     }
                 }
             }
-
         }
-
     }
-
 }
 
-
 Game::Game() {
-
     createLobby();
-
 }
