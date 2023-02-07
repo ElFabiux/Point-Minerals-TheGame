@@ -1,7 +1,7 @@
 #include "Player.h"
 
-Jugador::Jugador(std::string nombre, int x, int y) {
-    this->nombre = nombre;
+Jugador::Jugador(int x, int y) {
+    this->nombre = PedirNombre();
     this->puntos = 0;
 
     this->fuente.loadFromFile("arial.ttf");
