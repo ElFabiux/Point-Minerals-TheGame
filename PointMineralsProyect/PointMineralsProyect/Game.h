@@ -10,11 +10,7 @@ class Game {
 private:
     Card cards;
 
-    //bool loadButtons(const std::string&, sf::Texture&);
-    //void centerButton(sf::Sprite&, sf::RenderWindow&);
     void createLobby();
-    void CargarCartas(sf::RenderWindow&, sf::Texture, sf::Texture, sf::Texture, sf::Texture, sf::Texture, sf::Texture);
-    void GuardarCartas(LinkedList);
     void CalcularPosiciones(LinkedList);
     void CambiarPosiciones(LinkedList);
     void crearGrupos(LinkedList);
@@ -24,10 +20,8 @@ private:
     void actualizarJuego(LinkedList, sf::RenderWindow&);
     void movimientosAuto(LinkedList, string[], int monton);
     void Jugada(LinkedList, sf::Vector2i mousePos, int cartasU, int jugador, sf::RenderWindow&, int x, int y);
-    string grupos(LinkedList, int[], int[]);
     float Width(sf::Sprite);
     float Height(sf::Sprite);
-    LinkedList LoadCards(sf::RenderWindow&);
     void createMarket();
     void runLobbyWindow(sf::RenderWindow&, sf::Sprite&);
     void runMarketWindow(sf::RenderWindow&, sf::Sprite&);

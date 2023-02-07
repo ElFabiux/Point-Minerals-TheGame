@@ -1,13 +1,12 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "game.h"
+#include "Game.h"
 #include "Card.h"
 #include "LinkedList.h"
 #include <sstream>
 #include <random>
 #include "Player.h"
 
-//objets jugador de prueba
 Jugador jugador1(10, 10);
 Jugador jugador2(410, 10);
 
@@ -44,6 +43,7 @@ int cartasUsadas1 = 0;
 int cartasUsadas2 = 0;
 
 LinkedList cardList;
+LinkedList condicionesList;
 
 int cartaMovidas[4];
 string cartasJ1[17];
@@ -51,46 +51,11 @@ string cartasJ2[17];
 int jugado1 = 0;
 int jugado2 = 0;
 
-int cM = 0;
+int M = 0;
 
 sf::Sprite cartas[35];
 
 vector<string> cardVector;
-
-void Game::GuardarCartas(LinkedList CardList) {
-    for (int a = 0; a < 35; a++)
-    {
-        CardList.push_front(&cartas[a]);
-        std::cout << "carta guardada" << std::endl;
-    }
-}
-
-void Game::CargarCartas(sf::RenderWindow& window, sf::Texture cardTexture1, sf::Texture cardTexture2, sf::Texture cardTexture3, sf::Texture cardTexture4, sf::Texture cardTexture5, sf::Texture cardTexture6) {
-
-    int t1 = 0;
-    int t2 = 1;
-    int t3 = 2;
-    int t4 = 3;
-    int t5 = 4;
-    int t6 = 5;
-    for (int a = 0; a < 6; a++)
-    {
-        cartas[t1].setTexture(cardTexture1);
-        cartas[t2].setTexture(cardTexture2);
-        cartas[t3].setTexture(cardTexture3);
-        cartas[t4].setTexture(cardTexture4);
-        cartas[t5].setTexture(cardTexture5);
-        cartas[t6].setTexture(cardTexture6);
-        t1++;
-        t2++;
-        t3++;
-        t4++;
-        t5++;
-        t6++;
-        std::cout << "carta creada" << std::endl;
-    }
-
-}
 
 void Game::crearGrupos(LinkedList cardList) {
 
@@ -233,9 +198,9 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
             oss << node;
             string cardNode = oss.str();
             sf::Vector2f pos = (*node->card).getPosition();
-            cartaMovidas[cM] = pos.x;
-            cartaMovidas[cM + 1] = pos.y;
-            cM = cM + 2;
+            cartaMovidas[M + 1] = pos.x;
+            cartaMovidas[M + 1] = pos.y;
+            M = M + 2;
             int posicion1 = pos.x;
             int posicion2 = pos.y;
             std::cout << "click en carta detectado: x" << pos.x << " y" << pos.y << "  " << node << std::endl;
@@ -307,7 +272,7 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
                     }
                     std::cout << "coordenadas nuevas 1  " << posicion1 << " " << posicion2 << std::endl;
 
-                    if (cM == 4)
+                    if (M == 4)
                     {
                         LlenarMercado(window);
                     }
@@ -374,7 +339,7 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
                         }
                     }
                     std::cout << "coordenadas nuevas 2  " << posicion1 << " " << posicion2 << std::endl;
-                    if (cM == 4)
+                    if (M == 4)
                     {
                         LlenarMercado(window);
                     }
@@ -389,6 +354,8 @@ void Game::Jugada(LinkedList cardList, sf::Vector2i mousePos, int cartaU, int Ju
 
 
     }
+
+
 
 }
 
@@ -416,7 +383,7 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                     node->card->setPosition(cartaMovidas[0], cartaMovidas[1]);
 
                     monton1--;
-                    cM = 0;
+                    M = 0;
                 }
 
 
@@ -428,7 +395,7 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                 if (cardNode == group2[monton2]) {
                     node->card->setPosition(cartaMovidas[0], cartaMovidas[1]);
                     monton2--;
-                    cM = 0;
+                    M = 0;
                 }
 
 
@@ -439,7 +406,7 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                 if (cardNode == group3[monton3]) {
                     node->card->setPosition(cartaMovidas[0], cartaMovidas[1]);
                     monton3--;
-                    cM = 0;
+                    M = 0;
                 }
 
 
@@ -468,7 +435,7 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                     node->card->setPosition(cartaMovidas[2], cartaMovidas[3]);
                     monton1--;
 
-                    cM = 0;
+                    M = 0;
                 }
 
 
@@ -480,7 +447,7 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                 if (cardNode == group2[monton2]) {
                     node->card->setPosition(cartaMovidas[2], cartaMovidas[3]);
                     monton2--;
-                    cM = 0;
+                    M = 0;
                 }
 
 
@@ -491,7 +458,7 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
                 if (cardNode == group3[monton3]) {
                     node->card->setPosition(cartaMovidas[2], cartaMovidas[3]);
                     monton3--;
-                    cM = 0;
+                    M = 0;
                 }
 
 
@@ -685,11 +652,15 @@ void Game::LlenarMercado(sf::RenderWindow& window) {
         }
     }
 
+
     for (int i = 0; i < 17; i++)
     {
         std::cout << "cartas de jugador 1: " << cartasJ1[i] << std::endl;
         std::cout << "cartas de jugador 2: " << cartasJ2[i] << std::endl;
     }
+
+
+
 
     actualizarJuego(cardList, window);
 }
@@ -728,8 +699,6 @@ void Game::movimientosAuto(LinkedList cardList, string Grupo[], int monton) {
 
 
 }
-
-
 
 
 float Game::Height(sf::Sprite card) {
@@ -783,7 +752,6 @@ void Game::createLobby() {
 }
 
 
-
 void Game::createMarket() {
 
     sf::RenderWindow window;
@@ -817,9 +785,6 @@ void Game::createMarket() {
 }
 
 
-
-//Cargar la ventana  
-
 void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite)
 
 {
@@ -831,8 +796,6 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
     Button playB("ResourseFiles/Buttons/Play.png");
 
     Button loadB("ResourseFiles/Buttons/Load.png");
-
-
 
     playB.centerButton(window);
 
@@ -914,6 +877,8 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
 
         loadB.showButton(window);
 
+
+
         // Display the window 
 
         window.display();
@@ -921,6 +886,7 @@ void Game::runLobbyWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite
     }
 
 }
+
 
 void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprite) {
     int fps = 240;
@@ -1078,11 +1044,6 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
             window.draw(*node->card);
         }
 
-        //Prueba de nombre y puntos de la clase player
-        jugador1.Dibujar(window);
-        jugador2.Dibujar(window);
-        //
-
 
 
         window.display();
@@ -1134,10 +1095,11 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
                                             cartasUsadas1++;
                                         }
 
+
                                         std::cout << "jugada: " << jugadas << std::endl;
                                         if (jugadas == 2)
                                         {
-                                            std::cout << "rellenar market " << std::endl;
+
 
                                             jugadorActual = 2;
 
@@ -1196,9 +1158,8 @@ void Game::runMarketWindow(sf::RenderWindow& window, sf::Sprite& backgroundSprit
         }
 
     }
-    
-}
 
+}
 
 
 Game::Game() {
